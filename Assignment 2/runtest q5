@@ -1,0 +1,8 @@
+#!/bin/sh
+
+awk "NR % 3 == 2" $1 > inputs.txt
+awk "NR % 3 == 0" $1 > correct.txt
+cat inputs.txt | ./a.out > outputs.txt
+echo output \| correct
+sdiff -l outputs.txt correct.txt | cat -n > results.txt
+cat results.txt | grep -v -e '($'
